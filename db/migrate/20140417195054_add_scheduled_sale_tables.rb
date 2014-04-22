@@ -3,18 +3,32 @@ class AddScheduledSaleTables < ActiveRecord::Migration
     create_table :spree_scheduled_sales do |t|
       t.string :name
       t.string :title
-      t.text :description
-      t.text :description2
       t.string :permalink
-      t.datetime :start_date
-      t.datetime :end_date
+      t.attachment :image
+      t.datetime :start_date_time
+      t.datetime :end_date_time
+      t.boolean :clearance, default: false
+      t.boolean :weekly_sale, default: false
       t.boolean :is_active, default: true
       t.integer :discount
       t.timestamps
     end
-    create_table :spree_items_scheduled_sales do |t|
-      t.string :name
 
+    create_table :spree_items_scheduled_sales do |t|
+      t.integer :spree_scheduled_sales_id
+      t.integer :item_id
+      t.string :item_type
+      t.integer :override_price_as_cents
+      t.boolean :exclude_item_from_sale, :default => true
+      t.timestamps
+    end
+
+    create_table :spree_items_scheduled_description_placements do |t|
+      t.integer :spree_scheduled_sales_id
+      t.string :placement_location
+      t.text :description
+      t.boolean :exclude_item_from_sale, :default => true
+      t.timestamps
     end
   end
 end
