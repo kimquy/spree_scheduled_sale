@@ -1,0 +1,100 @@
+<% if @scheduled_sale.try(:errors).present? %>
+    <!--todo: fix-->
+    <%= @scheduled_sale.inspect %>
+<% end %>
+
+<fieldset data-hook="admin_scheduled_sale_form_fields">
+
+  <div class="clearfix">
+    <div class="left eight columns alpha" data-hook="admin_scheduled_sale_form_left">
+      <%= form.field_container :name do %>
+          <%= form.label :name, raw(t('spree.scheduled_sale.active_record.name') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.text_field :name, :class => 'fullwidth' %>
+          <%= form.error_message_on :name %>
+      <% end %>
+      <div class="row">
+        <div class="alpha four columns">
+          <%= form.field_container :start_date_time do %>
+              <%= form.label :start_date_time, t('spree.scheduled_sale.active_record.start_date') %>
+              <%= form.error_message_on :start_date_time %>
+              <% if @scheduled_sale.start_date_time? %>
+                  <% start_date = l(@scheduled_sale.start_date_time, :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <% else %>
+                  <% start_date = l(Time.zone.now, :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <% end %>
+              <%= form.text_field :start_date_time, :value => start_date, :class => 'timepicker' %>
+          <% end %>
+        </div>
+
+        <div class="omega four columns">
+          <%= form.field_container :end_date_time do %>
+              <%= form.label :end_date_time , t('spree.scheduled_sale.active_record.end_date') %>
+              <%= form.error_message_on :end_date_time  %>
+              <% end_date = l((@scheduled_sale.end_date_time? ? @scheduled_sale.end_date_time : Time.zone.now+1.day), :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <%= form.text_field :end_date_time , :value => end_date, :class => 'timepicker' %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right eight columns omega" data-hook="admin_scheduled_sale_form_right">
+      <div class="row">
+        <div class="alpha four columns clearfix">
+          <%= form.field_container :is_active, :class => ['checkbox'] do %>
+              <label>
+                <%= form.check_box :is_active %>
+                <%= t('spree.scheduled_sale.active_record.is_active') %>
+                <%= form.error_message_on :is_active %>
+              </label>
+          <% end %>
+
+        </div>
+
+        <div class="omega four columns">
+          <%= form.field_container :discount do %>
+              <%= form.label :discount, t('spree.scheduled_sale.active_record.discount', :default => :discount) %>
+              <p class='hint'><%= t('spree.scheduled_sale.discount_hint') %></p>
+              <%= form.error_message_on :discount %>
+              <%= form.text_field :discount %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <% unless @scheduled_sale.new_record? %>
+      <ul class="inline-menu">
+        <li>< % = link_to_with_icon('icon-plus', Spree.t(:new_image), new_admin_active_sale_scheduled_sale_sale_image_url(@active_sale, @scheduled_sale), :id => 'new_sale_image_link', :class => 'button') %></li>
+      </ul>
+      <br/>
+      < % = render 'spree/admin/shared/sale_images' %>
+  <% end %>
+
+
+  <p class="form-buttons" data-hook="admin_active_sale_form_buttons">
+    <% if @scheduled_sale.new_record? %>
+        <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+    <% else %>
+        <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+    <% end %>
+  </p>
+</fieldset>
+
+<%= javascript_tag do -%>
+    var properties = "<%= raw(@properties.to_json) %>";
+
+    $("#admin_active_sale_event input.autocomplete").on("keydown", function(){
+    var eventable_type = $('#scheduled_sale_eventable_type :selected').val();
+    var eventable_name = $('#scheduled_sale_eventable_name').val();
+    var url = $(this).data('auto-complete-url')
+    already_auto_completed = $(this).is('ac_input');
+    if (!already_auto_completed) {
+    $(this).autocomplete({
+    source: url+"?eventable_type="+eventable_type+"&name="+eventable_name
+    });
+    $(this).focus();
+    }
+    });
+<% end -%>

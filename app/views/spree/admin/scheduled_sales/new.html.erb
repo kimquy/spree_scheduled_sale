@@ -1,0 +1,17 @@
+<% content_for :page_title do %>
+     <%= t('spree.scheduled_sale.title.new') %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to t('spree.scheduled_sale.link.back'), [:admin, @scheduled_sale], :icon => 'icon-arrow-left', :id => 'admin_new_scheduled_sale_link' %>
+    </li>
+<% end %>
+
+<div data-hook="admin_scheduled_sale_edit_form">
+  <div id="scheduled_sale-form-wrapper">
+    <%= form_for [:admin, @scheduled_sale], :html => { :id => 'admin_scheduled_sale', :multipart => true } do |form| %>
+        <%= render :partial => 'form', :locals => { :form => form } %>
+    <% end %>
+  </div>
+</div>

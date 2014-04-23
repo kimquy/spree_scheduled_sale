@@ -25,9 +25,14 @@ class AddScheduledSaleTables < ActiveRecord::Migration
 
     create_table :spree_items_scheduled_description_placements do |t|
       t.integer :spree_scheduled_sales_id
-      t.string :placement_location
+      t.integer :spree_scheduled_sales_placement_location_id
       t.text :description
       t.boolean :exclude_item_from_sale, :default => true
+      t.timestamps
+    end
+
+    create_table :spree_scheduled_sales_placement_locations do |t|
+      t.string :description
       t.timestamps
     end
   end
