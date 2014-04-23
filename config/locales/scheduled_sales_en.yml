@@ -7,6 +7,7 @@ en:
         end_date: "End At Date & Time"
       title:
         new: "New Scheduled Sale"
+        edit: "Edit Scheduled Sale"
       link:
         new: "New Scheduled Sale"
         edit: "Edit Scheduled Sale"
