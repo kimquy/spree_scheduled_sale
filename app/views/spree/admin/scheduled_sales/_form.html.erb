@@ -64,6 +64,7 @@
     </div>
   </div>
 
+
   <% unless @scheduled_sale.new_record? %>
       <ul class="inline-menu">
         <li>< % = link_to_with_icon('icon-plus', Spree.t(:new_image), new_admin_active_sale_scheduled_sale_sale_image_url(@active_sale, @scheduled_sale), :id => 'new_sale_image_link', :class => 'button') %></li>
@@ -72,12 +73,17 @@
       < % = render 'spree/admin/shared/sale_images' %>
   <% end %>
 
-
   <p class="form-buttons" data-hook="admin_active_sale_form_buttons">
     <% if @scheduled_sale.new_record? %>
         <%= render :partial => 'spree/admin/shared/new_resource_links' %>
     <% else %>
-        <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= link_to_with_icon 'icon-plus', 'Add Item', '/x', :class => 'button' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button Spree.t('actions.update'), 'icon-refresh' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button_link_to Spree.t('actions.cancel'), collection_url, :icon => 'icon-remove' %>
+      </div>
     <% end %>
   </p>
 </fieldset>
