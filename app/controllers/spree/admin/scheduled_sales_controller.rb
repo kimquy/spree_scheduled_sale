@@ -10,6 +10,10 @@ module Spree
 
       end
 
+      def items_search
+        search = params[:item_type].constantize.search(:name_cont => params[:name])
+        render :json => search.result.map(&:name)
+      end
     end
   end
 end
