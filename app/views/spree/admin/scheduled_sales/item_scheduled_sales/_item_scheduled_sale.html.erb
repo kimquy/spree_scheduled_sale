@@ -1,0 +1,17 @@
+<tr class="<%= cycle('odd', 'even')%>">
+  <td class="no-border">
+    <%= item_scheduled_sale.id%>
+  </td>
+  <td >
+    <%= item_scheduled_sale.item.class %>
+  </td>
+  <td >
+    <%= item_scheduled_sale.item.name %>
+  </td>
+  <td >
+    <%= item_scheduled_sale.item.price %>
+  </td>
+  <td >
+    <%= item_scheduled_sale.override_price_as_cents %>
+  </td>
+</tr>

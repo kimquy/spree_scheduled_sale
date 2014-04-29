@@ -15,7 +15,7 @@ class AddScheduledSaleTables < ActiveRecord::Migration
     end
 
     create_table :spree_items_scheduled_sales do |t|
-      t.integer :spree_scheduled_sales_id
+      t.integer :scheduled_sale_id
       t.integer :item_id
       t.string :item_type
       t.integer :override_price_as_cents
