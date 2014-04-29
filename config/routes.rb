@@ -5,7 +5,8 @@ Spree::Core::Engine.routes.draw do
       collection do
         get :items_search
       end
-      resources :item_scheduled_sales do
+
+      resources :item_scheduled_sales, :controller => 'scheduled_sales/item_scheduled_sales' do
 
       end
     end
