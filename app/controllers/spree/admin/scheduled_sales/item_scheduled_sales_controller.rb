@@ -8,7 +8,6 @@ module Spree
         end
 
         def create
-          puts "NEWWWWW " *8888888
           render :text => "YES"
         end
       end
