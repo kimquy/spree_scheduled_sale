@@ -4,6 +4,16 @@ module Spree
     belongs_to :item, polymorphic: true
     belongs_to :scheduled_sale
 
+    scope :active, lambda{
+      joins(:scheduled_sale).where('spree_scheduled_sales.is_active = ?', true)
+    }
+
+    scope :by_taxon, lambda{ |taxon_ids|
+      {
+          :conditions => ["item_type = 'Spree::Taxon' and item_id in (?)", taxon_ids ]
+      }
+    }
+
     def item_calculated_price
       if item.respond_to?(:price)
         discount_amount = item.price * scheduled_sale.discount_as_percent
