@@ -49,6 +49,7 @@
     <th>Retail Price</th>
     <th>Calculated Price</th>
     <th>Override Price</th>
+    <th>Exclude?</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -59,6 +60,12 @@
 </table>
 <script type="text/javascript">
     var addItemURL = '<%= admin_scheduled_sale_item_scheduled_sales_path(:scheduled_sale_id => @scheduled_sale.id) %>';
+
+    $('input[name="item_scheduled_sale[exclude_item_from_sale]"]').on('click', function (evt) {
+        var textField = $(evt.target).closest('tr').find('input[name="item_scheduled_sale[override_price_as_cents]"]');
+        textField.val('');
+        textField.prop('disabled', $(evt.target).is(':checked'))
+    });
     $('[data-handler="remote-add-item"]').on('click', function() {
         $.post(addItemURL,
                 {item_scheduled_sale: {item_type:  $('#item_scheduled_sale_item_type').val(),

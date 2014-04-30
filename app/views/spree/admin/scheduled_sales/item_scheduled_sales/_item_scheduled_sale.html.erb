@@ -19,7 +19,14 @@
         <% if item_scheduled_sale.item.instance_of? Spree::Taxon  %>
             NA
         <% else %>
-            $&nbsp;<%= f.text_field :override_price_as_cents %>
+            $<%= f.text_field :override_price_as_cents %>
+        <% end %>
+      </td>
+      <td>
+        <% if item_scheduled_sale.item.instance_of? Spree::Taxon  %>
+            NA
+        <% else %>
+            <%= f.check_box :exclude_item_from_sale %>
         <% end %>
       </td>
       <td class="actions">
