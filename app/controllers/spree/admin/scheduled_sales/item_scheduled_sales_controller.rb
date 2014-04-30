@@ -18,7 +18,11 @@ module Spree
           params.require(:item_scheduled_sale).permit(:item_id, :item_type)
         end
 
+        def collection_url(options = {})
+          edit_admin_scheduled_sale_url(:id => parent.id)
+        end
       end
+
     end
   end
 end
