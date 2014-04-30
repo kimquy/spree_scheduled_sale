@@ -8,6 +8,14 @@ module Spree
       joins(:scheduled_sale).where('spree_scheduled_sales.is_active = ?', true)
     }
 
+    scope :excluded, lambda{
+      where('exclude_item_from_sale = ?', true)
+    }
+
+    scope :not_excluded, lambda{
+      where('exclude_item_from_sale = ?', false)
+    }
+
     scope :by_taxon, lambda{ |taxon_ids|
       {
           :conditions => ["item_type = 'Spree::Taxon' and item_id in (?)", taxon_ids ]
