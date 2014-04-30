@@ -1,4 +1,4 @@
-<%= form_for [:admin, @scheduled_sale, Spree::ItemScheduledSale.new] do |f| %>
+<%= form_for [:admin, @scheduled_sale, item_scheduled_sale] do |f| %>
     <tr class="<%= cycle('odd', 'even')%>">
       <td class="no-border">
         <%= item_scheduled_sale.id%>
@@ -15,8 +15,16 @@
       <td>
         <%= item_scheduled_sale.item_calculated_price %>
       </td>
-      <td >
-        <%= f.text_field :override_price_as_cents %>
+      <td>
+        <% if item_scheduled_sale.item.instance_of? Spree::Taxon  %>
+            NA
+        <% else %>
+            $&nbsp;<%= f.text_field :override_price_as_cents %>
+        <% end %>
       </td>
+      <td class="actions">
+        <%= button('Save', 'icon-plus' ) %>
+      </td>
+
     </tr>
 <% end %>

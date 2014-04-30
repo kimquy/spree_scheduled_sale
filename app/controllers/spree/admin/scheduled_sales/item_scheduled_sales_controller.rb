@@ -2,6 +2,7 @@ module Spree
   module Admin
     module ScheduledSales
       class ItemScheduledSalesController < ResourceController
+        belongs_to 'spree/scheduled_sale', :find_by => :id
 
         def index
 
