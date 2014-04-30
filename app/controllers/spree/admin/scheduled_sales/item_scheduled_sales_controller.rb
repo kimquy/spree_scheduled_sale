@@ -10,7 +10,6 @@ module Spree
         def create
           @scheduled_sale = Spree::ScheduledSale.find params[:scheduled_sale_id]
           @scheduled_sale.item_scheduled_sales.create!(item_scheduled_sales_params)
-
         end
 
         :protected

@@ -47,6 +47,7 @@
     <th>Item Type</th>
     <th>Name</th>
     <th>Retail Price</th>
+    <th>Calculated Price</th>
     <th>Override Price</th>
     <th>Action</th>
   </tr>
@@ -81,7 +82,7 @@
             }).data( "ui-autocomplete")._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                         .data( "item.autocomplete", item )
-                        .append( "<a>" + item.name + "</a>" )
+                        .append( "<a>" + item.label + "</a>" )
                         .appendTo( ul );
             };
             $(this).focus();
