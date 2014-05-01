@@ -14,17 +14,17 @@ Spree::Product.class_eval do
     taxon_sales = Spree::ItemScheduledSale.by_taxon(taxons.map(&:id))
 
     !taxon_sales.blank? &&
-        !product_excluded_from_any_sale?(taxon_sales)
+        !product_excluded_from_all_sale?(taxon_sales)
   end
 
   def any_variant_on_sale
     variants.any? {|v| !v.item_schedule_sales.active.blank}
   end
 
-  def product_excluded_from_any_sale?(taxon_sales)
-    item_scheduled_sales.active.any? do |product_sale|
+  def product_excluded_from_all_sale?(taxon_sales)
+    item_scheduled_sales.active.all? do |product_sale|
       product_sale.exclude_item_from_sale? &&
-          taxon_sales.any? do |taxon_sale|
+          taxon_sales.all? do |taxon_sale|
             product_sale.scheduled_sale == taxon_sale.scheduled_sale
           end
     end
