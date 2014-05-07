@@ -4,7 +4,7 @@ module Spree
     has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
     scope :currently_active, lambda{
-      where('? between start_date_time and  end_date_time', Time.current)
+      where('? between start_date_time and  end_date_time and is_active = ?', Time.current, true)
     }
 
 
@@ -16,6 +16,10 @@ module Spree
 
     def discount_formatted
       "#{discount}%"
+    end
+
+    def min_item_price
+      item_scheduled_sales
     end
 
     def end_date_brief
