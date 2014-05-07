@@ -13,5 +13,13 @@ module Spree
 
       discount / 100.to_f
     end
+
+    def discount_formatted
+      "#{discount}%"
+    end
+
+    def end_date_brief
+      end_date_time.present? ? end_date_time.strftime('%A %e/%-m') : ''
+    end
   end
 end

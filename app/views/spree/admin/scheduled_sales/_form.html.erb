@@ -12,6 +12,18 @@
           <%= form.text_field :name, :class => 'fullwidth' %>
           <%= form.error_message_on :name %>
       <% end %>
+      <%= form.field_container :title do %>
+          <%= form.label :title, raw(t('spree.scheduled_sale.active_record.title') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.text_field :title, :class => 'fullwidth' %>
+          <%= form.error_message_on :title %>
+      <% end %>
+
+      <%= form.field_container :title do %>
+          <%= form.label  :image, raw(t('spree.scheduled_sale.active_record.imgage') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.file_field(:image) %>
+          <%= form.error_message_on :image%>
+      <% end %>
+
       <div class="row">
         <div class="alpha four columns">
           <%= form.field_container :start_date_time do %>
