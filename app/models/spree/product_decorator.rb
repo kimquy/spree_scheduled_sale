@@ -20,7 +20,7 @@ Spree::Product.class_eval do
   end
 
   def product_on_sale?
-    !item_scheduled_sales.currently_active.not_excluded.blank?
+    !item_scheduled_sales.active.not_excluded.blank?
   end
 
   def taxon_on_sale?
@@ -31,7 +31,7 @@ Spree::Product.class_eval do
   end
 
   def any_variant_on_sale
-    variants.any? {|v| !v.item_schedule_sales.active.blank}
+    variants.any? {|v| !v.item_scheduled_sales.active.blank?}
   end
 
   def best_active_override_amount
