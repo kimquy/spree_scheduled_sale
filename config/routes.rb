@@ -1,5 +1,10 @@
 Spree::Core::Engine.routes.draw do
   # Add this extension's routes here
+
+  resources :scheduled_sales do
+
+  end
+
   namespace :admin do
     resources :scheduled_sales do
       collection do

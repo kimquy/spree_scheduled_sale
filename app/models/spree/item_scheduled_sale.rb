@@ -43,5 +43,10 @@ module Spree
       item.present? ? item.currency : Spree::Config[:currency]
     end
 
+    def products
+      return item.products if item.respond_to?(:products)
+      [item]
+    end
+
   end
 end
