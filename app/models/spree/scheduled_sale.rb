@@ -25,5 +25,26 @@ module Spree
     def end_date_brief
       end_date_time.present? ? end_date_time.strftime('%A %e/%-m') : ''
     end
+
+
+    def sale_price_min
+      products.map(&:sale_price).compact.min {|a,b|a.cents <=> b.cents}
+    end
+
+    def sale_price_max
+      products.map(&:sale_price).compact.max{|a,b|a.cents <=> b.cents}
+    end
+
+    def regular_price_min
+      products.map(&:price).min
+    end
+
+    def regular_price_max
+      products.map(&:price).max
+    end
+
+    def products
+      item_scheduled_sales.map(&:products).flatten
+    end
   end
 end
