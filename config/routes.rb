@@ -14,6 +14,10 @@ Spree::Core::Engine.routes.draw do
       resources :item_scheduled_sales, :controller => 'scheduled_sales/item_scheduled_sales' do
 
       end
+
+      resources :scheduled_sale_descriptions, :controller => 'scheduled_sales/scheduled_sale_descriptions' do
+
+      end
     end
   end
 end

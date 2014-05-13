@@ -1,5 +1,6 @@
 module Spree
   class ScheduledSale <  ActiveRecord::Base
+    has_many :scheduled_sale_descriptions
     has_many :item_scheduled_sales, :class_name => 'Spree::ItemScheduledSale'
     has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
