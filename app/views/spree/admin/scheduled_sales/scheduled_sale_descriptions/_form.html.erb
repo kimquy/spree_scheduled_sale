@@ -12,19 +12,18 @@
               <%= form.text_field :description, :class => 'fullwidth' %>
               <%= form.error_message_on :description %>
           <% end %>
+          <p class="form-buttons" data-hook="admin_active_sale_form_buttons">
+          <div class="form-buttons filter-actions actions" data-hook="buttons">
+            <%= button Spree.t('actions.update'), 'icon-refresh' %>
+            <span class="or"><%= Spree.t(:or) %></span>
+            <%= button_link_to Spree.t('actions.cancel'), collection_url, :icon => 'icon-remove' %>
+          </div>
+          </p>
+
       <% end %>
     </div>
 
   </div>
 
-  <p class="form-buttons" data-hook="admin_active_sale_form_buttons">
-  <div class="form-buttons filter-actions actions" data-hook="buttons">
-    <%= link_to_with_icon 'icon-plus', 'Add Item', '#', :class => 'button', 'data-handler' => 'remote-add-item' %>
-    <span class="or"><%= Spree.t(:or) %></span>
-    <%= button Spree.t('actions.update'), 'icon-refresh' %>
-    <span class="or"><%= Spree.t(:or) %></span>
-    <%= button_link_to Spree.t('actions.cancel'), collection_url, :icon => 'icon-remove' %>
-  </div>
-  </p>
 </fieldset>
 
