@@ -4,10 +4,16 @@ module Spree
     has_many :item_scheduled_sales, :class_name => 'Spree::ItemScheduledSale'
     has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
+    WEEKLY_DEAL_DESCRIPTION = 'weekly_deal_description'
+    PRODUCT_PRIMARY_DESCRIPTION = 'product_primary_description'
     scope :currently_active, lambda{
       where('? between start_date_time and  end_date_time and is_active = ?', Time.current, true)
     }
 
+    def description_for(key)
+      scheduled_sale_description = scheduled_sale_descriptions.detect{|d| d.key == key}
+      scheduled_sale_description.present? ? scheduled_sale_description.description : nil
+    end
 
     def discount_as_percent
       return 0.0 unless discount.present?

@@ -4,7 +4,7 @@
       <%= form_for [:admin, @scheduled_sale, Spree::ScheduledSaleDescription.new], :html => { :id => 'admin_scheduled_sale_description'} do |form| %>
           <%= form.field_container :key do %>
               <%= form.label :key, raw('Key' + content_tag(:span, ' *', :class => 'required')) %>
-              <%= form.text_field :key , :class => 'fullwidth' %>
+              <%= form.select :key , options_for_select([[Spree::ScheduledSale::WEEKLY_DEAL_DESCRIPTION, Spree::ScheduledSale::WEEKLY_DEAL_DESCRIPTION], [Spree::ScheduledSale::PRODUCT_PRIMARY_DESCRIPTION, Spree::ScheduledSale::PRODUCT_PRIMARY_DESCRIPTION]]), :class => 'fullwidth' %>
               <%= form.error_message_on :key %>
           <% end %>
           <%= form.field_container :description do %>
