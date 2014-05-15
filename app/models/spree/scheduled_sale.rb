@@ -6,6 +6,8 @@ module Spree
 
     WEEKLY_DEAL_DESCRIPTION = 'weekly_deal_description'
     PRODUCT_PRIMARY_DESCRIPTION = 'product_primary_description'
+    PRODUCT_SECONDARY_DESCRIPTION = 'product_secondary_description'
+
     scope :currently_active, lambda{
       where('? between start_date_time and  end_date_time and is_active = ?', Time.current, true)
     }
@@ -32,7 +34,6 @@ module Spree
     def end_date_brief
       end_date_time.present? ? end_date_time.strftime('%A %e/%-m') : ''
     end
-
 
     def sale_price_min
       products.map(&:sale_price).compact.min {|a,b|a.cents <=> b.cents}
