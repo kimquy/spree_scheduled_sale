@@ -1,0 +1,92 @@
+<% if @scheduled_sale.try(:errors).present? %>
+    <!--todo: fix-->
+    <%= @scheduled_sale.inspect %>
+<% end %>
+
+<fieldset data-hook="admin_scheduled_sale_form_fields">
+
+  <div class="clearfix">
+    <div class="left eight columns alpha" data-hook="admin_scheduled_sale_form_left">
+      <%= form.field_container :name do %>
+          <%= form.label :name, raw(t('spree.scheduled_sale.active_record.name') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.text_field :name, :class => 'fullwidth' %>
+          <%= form.error_message_on :name %>
+      <% end %>
+      <%= form.field_container :title do %>
+          <%= form.label :title, raw(t('spree.scheduled_sale.active_record.title') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.text_field :title, :class => 'fullwidth' %>
+          <%= form.error_message_on :title %>
+      <% end %>
+
+      <%= form.field_container :title do %>
+          <%= form.label  :image, raw(t('spree.scheduled_sale.active_record.imgage') + content_tag(:span, ' *', :class => 'required')) %>
+          <%= form.file_field(:image) %>
+          <%= form.error_message_on :image%>
+      <% end %>
+
+      <div class="row">
+        <div class="alpha four columns">
+          <%= form.field_container :start_date_time do %>
+              <%= form.label :start_date_time, t('spree.scheduled_sale.active_record.start_date') %>
+              <%= form.error_message_on :start_date_time %>
+              <% if @scheduled_sale.start_date_time? %>
+                  <% start_date = l(@scheduled_sale.start_date_time, :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <% else %>
+                  <% start_date = l(Time.zone.now, :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <% end %>
+              <%= form.text_field :start_date_time, :value => start_date, :class => 'timepicker' %>
+          <% end %>
+        </div>
+
+        <div class="omega four columns">
+          <%= form.field_container :end_date_time do %>
+              <%= form.label :end_date_time , t('spree.scheduled_sale.active_record.end_date') %>
+              <%= form.error_message_on :end_date_time  %>
+              <% end_date = l((@scheduled_sale.end_date_time? ? @scheduled_sale.end_date_time : Time.zone.now+1.day), :format => t('spree.scheduled_sale.datetimepicker.format')) %>
+              <%= form.text_field :end_date_time , :value => end_date, :class => 'timepicker' %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right eight columns omega" data-hook="admin_scheduled_sale_form_right">
+      <div class="row">
+        <div class="alpha four columns clearfix">
+          <%= form.field_container :is_active, :class => ['checkbox'] do %>
+              <label>
+                <%= form.check_box :is_active %>
+                <%= t('spree.scheduled_sale.active_record.is_active') %>
+                <%= form.error_message_on :is_active %>
+              </label>
+          <% end %>
+
+        </div>
+
+        <div class="omega four columns">
+          <%= form.field_container :discount do %>
+              <%= form.label :discount, t('spree.scheduled_sale.active_record.discount', :default => :discount) %>
+              <p class='hint'><%= t('spree.scheduled_sale.discount_hint') %></p>
+              <%= form.error_message_on :discount %>
+              <%= form.text_field :discount %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <p class="form-buttons" data-hook="admin_active_sale_form_buttons">
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= link_to_with_icon 'icon-plus', 'Add Item', '#', :class => 'button', 'data-handler' => 'remote-add-item' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button Spree.t('actions.update'), 'icon-refresh' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button_link_to Spree.t('actions.cancel'), collection_url, :icon => 'icon-remove' %>
+      </div>
+  </p>
+</fieldset>
+

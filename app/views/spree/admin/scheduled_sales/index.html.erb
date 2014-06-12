@@ -1,0 +1,66 @@
+<% content_for :head do %>
+<% end %>
+
+<% content_for :page_title do %>
+   Scheduled Sale
+<% end %>
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to t('spree.scheduled_sale.link.new'), new_admin_scheduled_sale_url, :icon => 'icon-plus', :id => 'admin_new_active_sale_link' %>
+      <%= button_link_to t('spree.scheduled_sale.link.back'), collection_url, :icon => 'icon-arrow-left', :id => 'admin_new_active_sale_link' %>
+    </li>
+<% end %>
+
+<div id="ajax_error" class="errorExplanation" style="display:none;"></div>
+
+<fieldset class="no-border-top">
+  <div>
+    <table class="index sortable" data-hook="images_table">
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 20%">
+        <col style="width: 45%">
+        <col style="width: 15%">
+      </colgroup>
+      <thead>
+      <tr data-hook="images_header">
+        <th>Item Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Item(s)</th>
+        <th>Active?</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @scheduled_sales.each do |sale| %>
+          <tr class="<%= cycle('odd', 'even')%>">
+            <td class="no-border">
+              <%= sale.name %>
+            </td>
+            <td>
+              <%= sale.start_date_time.strftime(t('spree.scheduled_sale.datetime.format')) %>
+            </td>
+            <td>
+              <%= sale.end_date_time.strftime(t('spree.scheduled_sale.datetime.format')) %>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td class="actions">
+              <%= link_to_edit_url [:edit, :admin, sale], :no_text => true %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+  </div>
+
+  <br>
+</fieldset>
+

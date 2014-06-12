@@ -1,0 +1,14 @@
+<h1 class="taxon-title"><%= @scheduled_sale.name %></h1>
+<div id="category" class="left-content">
+  <p>
+    <%= @scheduled_sale.description %>
+  </p>
+  <% if @scheduled_sale.item_scheduled_sales.present? %>
+      <div data-hook="taxon_products">
+        <%= render :partial => 'spree/shared/products', :locals => {:products => @scheduled_sale.item_scheduled_sales.map(&:products).flatten, :taxon => nil} %>
+      </div>
+  <% end %>
+</div>
+<aside id="right-sidebar">
+
+</aside>

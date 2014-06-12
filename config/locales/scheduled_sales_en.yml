@@ -1,0 +1,27 @@
+en:
+  spree:
+    scheduled_sale:
+      active_record:
+        name: "Sale name"
+        start_date: "Start At Date & Time"
+        end_date: "End At Date & Time"
+      title:
+        new: "New Scheduled Sale"
+        edit: "Edit Scheduled Sale"
+      link:
+        new: "New Scheduled Sale"
+        edit: "Edit Scheduled Sale"
+        back: "Back to Scheduled Sale list"
+      datetime:
+        format: ! '%Y/%m/%d - %l:%M:%S %p '
+      datetimepicker:
+        format: ! '%Y/%m/%d %H:%M:%S %z'
+        js_format: 'HH:mm:ss z'
+        js_date_format: 'yy/mm/dd'
+        time_only_title: 'Time only'
+        time_text: 'Time'
+        hour_text: 'Hour'
+        minute_text: 'Minute'
+        second_text: 'Second'
+        current_text: 'Current'
+        close_text: 'Close'

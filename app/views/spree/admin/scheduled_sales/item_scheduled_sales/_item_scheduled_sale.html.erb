@@ -1,0 +1,37 @@
+<%= form_for [:admin, @scheduled_sale, item_scheduled_sale] do |f| %>
+    <tr class="<%= cycle('odd', 'even')%>">
+      <td class="no-border">
+        <%= item_scheduled_sale.id%>
+      </td>
+      <td >
+        <%= item_scheduled_sale.item.class %>
+      </td>
+      <td >
+        <%= item_scheduled_sale.item.name %>
+      </td>
+      <td >
+        <%= item_scheduled_sale.item.respond_to?(:price) ? item_scheduled_sale.item.price : 'NA' %>
+      </td>
+      <td>
+        <%= item_scheduled_sale.item_calculated_price %>
+      </td>
+      <td>
+        <% if item_scheduled_sale.item.instance_of? Spree::Taxon  %>
+            NA
+        <% else %>
+            $<%= f.text_field :override_price_as_cents %>
+        <% end %>
+      </td>
+      <td>
+        <% if item_scheduled_sale.item.instance_of? Spree::Taxon  %>
+            NA
+        <% else %>
+            <%= f.check_box :exclude_item_from_sale %>
+        <% end %>
+      </td>
+      <td class="actions">
+        <%= button('Save', 'icon-plus' ) %>
+      </td>
+
+    </tr>
+<% end %>
