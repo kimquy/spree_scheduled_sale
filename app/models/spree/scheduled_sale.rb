@@ -1,5 +1,7 @@
 module Spree
-  class ScheduledSale <  ActiveRecord::Base
+  class ScheduledSale < ActiveRecord::Base
+    has_many :adjustments, :as => :source
+
     has_many :scheduled_sale_descriptions
     has_many :item_scheduled_sales, :class_name => 'Spree::ItemScheduledSale'
     has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
@@ -11,6 +13,14 @@ module Spree
     scope :currently_active, lambda{
       where('? between start_date_time and  end_date_time and is_active = ?', Time.current, true)
     }
+
+    # Ensure a negative amount which does not exceed the sum of the order's
+    # item_total and ship_total
+    def compute_amount(adjustable)
+      promotion_amount = adjustable.variant.product.sale_amount
+
+      promotion_amount * -1
+    end
 
     def description_for(key)
       scheduled_sale_description = scheduled_sale_descriptions.detect{|d| d.key == key}
