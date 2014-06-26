@@ -9,6 +9,16 @@ Spree::Variant.class_eval do
     on_sale? ? derived_sale_price : nil
   end
 
+  def sale_amount
+    discount_amount = price * best_active_discount_amount_as_percent
+  end
+
+  def active_scheduled_sale
+    return nil unless on_sale?
+
+    active_sales.first
+  end
+
   :protected
   def derived_sale_price
     discount_amount = price * best_active_discount_amount_as_percent
