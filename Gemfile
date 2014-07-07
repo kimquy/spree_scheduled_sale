@@ -13,7 +13,7 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'rails', '4.0.3'
+gem 'rails', '~> 4.1'
 
 gem "paperclip", "~> 4.1"
 
