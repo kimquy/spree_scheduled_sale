@@ -17,9 +17,7 @@ module Spree
     }
 
     scope :by_taxon, lambda{ |taxon_ids|
-      {
-          :conditions => ["item_type = 'Spree::Taxon' and item_id in (?)", taxon_ids ]
-      }
+      ["item_type = 'Spree::Taxon' and item_id in (?)", taxon_ids ]
     }
 
     def item_calculated_price
