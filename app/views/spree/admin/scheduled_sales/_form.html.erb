@@ -52,24 +52,46 @@
 
     <div class="right eight columns omega" data-hook="admin_scheduled_sale_form_right">
       <div class="row">
-        <div class="alpha four columns clearfix">
+        <div class="omega four columns">
+          <%= form.field_container :discount do %>
+              <%= form.label :discount, 'Discount Amount' %>
+              <p class='hint'>
+                % off
+              </p>
+              <%= form.error_message_on :discount %>
+              <%= form.text_field :discount %>
+          <% end %>
+        </div>
+
+        <div class="omega four columns">
           <%= form.field_container :is_active, :class => ['checkbox'] do %>
               <label>
                 <%= form.check_box :is_active %>
-                <%= t('spree.scheduled_sale.active_record.is_active') %>
+                Active?
                 <%= form.error_message_on :is_active %>
               </label>
           <% end %>
 
-        </div>
-
-        <div class="omega four columns">
-          <%= form.field_container :discount do %>
-              <%= form.label :discount, t('spree.scheduled_sale.active_record.discount', :default => :discount) %>
-              <p class='hint'><%= t('spree.scheduled_sale.discount_hint') %></p>
-              <%= form.error_message_on :discount %>
-              <%= form.text_field :discount %>
+          <%= form.field_container :weekly_sale, :class => ['checkbox'] do %>
+              <label>
+                <%= form.check_box :weekly_sale %>
+                Weekly Promo?
+                <%= form.error_message_on :weekly_sale%>
+              </label>
           <% end %>
+
+          <%= form.field_container :clearance, :class => ['checkbox'] do %>
+              <label>
+                <%= form.check_box :clearance %>
+                Clearance?
+                <%= form.error_message_on :clearance%>
+              </label>
+              <p class='hint'>
+                Indicates if the sale gets clearance indicators.
+              </p>
+          <% end %>
+
+
         </div>
       </div>
     </div>
