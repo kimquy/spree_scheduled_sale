@@ -9,6 +9,10 @@ Spree::Product.class_eval do
     on_sale? ? derived_sale_price : nil
   end
 
+  def price_in(currency)
+    on_sale? ? derived_sale_price : price_in(currency)
+  end
+
   def sale_amount
     discount_amount = price * best_active_discount_amount_as_percent
   end
