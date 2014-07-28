@@ -54,11 +54,11 @@ module Spree
     end
 
     def regular_price_min
-      products.map(&:price).min
+      products.map(&:orig_price).min
     end
 
     def regular_price_max
-      products.map(&:price).max
+      products.map(&:orig_price).max
     end
 
     def products
