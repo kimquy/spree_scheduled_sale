@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Declare your gem's dependencies in spree_scheduled_sale.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
-gemspec
+# gemspec
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
@@ -13,7 +13,10 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-gem 'rails', '4.0.3'
+gem 'rails', '~> 4.0.5'
+gem 'spree', '~> 2.2.0'
 
-gem "paperclip", "~> 4.1"
+# gem 'spree', github: 'spree/spree', branch: '2-2-stable'
+
+# gem 'paperclip', '~>3.0'
 
