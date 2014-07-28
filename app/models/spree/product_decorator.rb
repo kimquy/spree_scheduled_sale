@@ -11,7 +11,7 @@ Spree::Product.class_eval do
 
   alias_method :orig_price_in, :price_in
   def price_in(currency)
-    on_sale? ? derived_sale_price : orig_price_i(currency)
+    on_sale? ? derived_sale_price : orig_price_in(currency)
   end
 
   def sale_amount
