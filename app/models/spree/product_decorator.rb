@@ -14,13 +14,17 @@ Spree::Product.class_eval do
     on_sale? ? derived_sale_price : orig_price()
   end
 
-  alias_method :orig_price_in, :price_in
-  def price_in(currency)
-    on_sale? ? derived_sale_price : orig_price_in(currency)
+  def huh()
+    orig_price
   end
 
   def sale_amount
-    discount_amount = orig_price * best_active_discount_amount_as_percent
+    orig_price.to_f * best_active_discount_amount_as_percent
+  end
+
+  alias_method :orig_price_in, :price_in
+  def price_in(currency)
+    on_sale? ? derived_sale_price : orig_price_in(currency)
   end
 
   def active_scheduled_sale
@@ -29,14 +33,13 @@ Spree::Product.class_eval do
     active_sales.first
   end
 
-  # :protected
   def derived_sale_price
     best_active_override_amount.present? ? best_active_override_amount : calculated_price
   end
 
   def calculated_price
     discount_amount = sale_amount
-    Spree::Money.new(orig_price - discount_amount, { currency: currency })
+    Spree::Money.new(orig_price.to_f - discount_amount, { currency: currency })
   end
 
   def product_on_sale?

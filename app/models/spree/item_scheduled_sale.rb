@@ -23,9 +23,9 @@ module Spree
     }
 
     def item_calculated_price
-      if item.respond_to?(:price)
-        discount_amount = item.price * scheduled_sale.discount_as_percent
-        Spree::Money.new(item.price - discount_amount, { currency: currency })
+      if item.respond_to?(:orig_price)
+        discount_amount = item.orig_price * scheduled_sale.discount_as_percent
+        Spree::Money.new(item.orig_price - discount_amount, { currency: currency })
       else
         'NA'
       end

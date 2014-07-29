@@ -10,7 +10,7 @@
         <%= item_scheduled_sale.item.name %>
       </td>
       <td >
-        <%= item_scheduled_sale.item.respond_to?(:price) ? item_scheduled_sale.item.price : 'NA' %>
+        <%= item_scheduled_sale.item.respond_to?(:orig_price) ? item_scheduled_sale.item.orig_price : 'NA' %>
       </td>
       <td>
         <%= item_scheduled_sale.item_calculated_price %>
