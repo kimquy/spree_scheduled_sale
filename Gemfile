@@ -13,6 +13,7 @@ source "https://rubygems.org"
 # To use debugger
 # gem 'debugger'
 
+gem 'sqlite3'
 gem 'rails', '~> 4.0.5'
 gem 'spree', '~> 2.2.0'
 
@@ -20,3 +21,9 @@ gem 'spree', '~> 2.2.0'
 
 # gem 'paperclip', '~>3.0'
 
+
+gem 'rspec-rails', :group => [:development, :test]
+
+group :development, :test do
+  gem 'ffaker'
+end
