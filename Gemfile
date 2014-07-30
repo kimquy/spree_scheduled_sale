@@ -27,3 +27,8 @@ gem 'rspec-rails', :group => [:development, :test]
 group :development, :test do
   gem 'ffaker'
 end
+
+group :test do
+  gem 'flexmock'
+  gem 'pg'
+end

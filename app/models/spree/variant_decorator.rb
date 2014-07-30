@@ -2,7 +2,7 @@ Spree::Variant.class_eval do
   has_many :item_scheduled_sales, :class_name => 'Spree::ItemScheduledSale', :as => :item
 
   def on_sale?
-    !item_scheduled_sales.active.not_excluded.blank?
+    product.on_sale? || !item_scheduled_sales.active.not_excluded.blank?
   end
 
   def sale_price
