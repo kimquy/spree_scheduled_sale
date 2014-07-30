@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SpreeScheduledSaleTest < ActiveSupport::TestCase
+class VariantTest < ActiveSupport::TestCase
 
   test "variant should be on sale if the parent product is on sale even if variant is not specificaly on sale" do
     product = flexmock(Spree::Product.new)
