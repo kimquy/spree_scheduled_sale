@@ -3,5 +3,4 @@ Spree::Money.class_eval do
     self
   end
   alias :display_price :display_amount
-
 end
