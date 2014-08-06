@@ -2,11 +2,15 @@ Spree::Product.class_eval do
   has_many :item_scheduled_sales, :class_name => 'Spree::ItemScheduledSale', :as => :item
 
   def on_sale?
-    taxon_on_sale? || product_on_sale? || any_variant_on_sale
+    product_on_sale? || any_variant_on_sale
   end
 
   def sale_price
     on_sale? ? derived_sale_price : nil
+  end
+
+  def sale_amount
+    orig_price.to_f * best_active_discount_amount_as_percent
   end
 
   alias_method :orig_price, :price
@@ -14,17 +18,9 @@ Spree::Product.class_eval do
     on_sale? ? derived_sale_price : orig_price()
   end
 
-  def huh()
-    orig_price
-  end
-
-  def sale_amount
-    orig_price.to_f * best_active_discount_amount_as_percent
-  end
-
   alias_method :orig_price_in, :price_in
   def price_in(currency)
-    on_sale? ? derived_sale_price : orig_price_in(currency)
+    on_sale? ?  Spree::Price.new(:variant_id => self.master.id, :amount => self.derived_sale_price , :currency => currency): orig_price_in(currency)
   end
 
   def active_scheduled_sale
@@ -39,18 +35,11 @@ Spree::Product.class_eval do
 
   def calculated_price
     discount_amount = sale_amount
-    Spree::Money.new(orig_price.to_f - discount_amount, { currency: currency })
+    orig_price.to_f - discount_amount
   end
 
   def product_on_sale?
     !item_scheduled_sales.active.not_excluded.blank?
-  end
-
-  def taxon_on_sale?
-    taxon_sales = Spree::ItemScheduledSale.by_taxon(taxons.map(&:id))
-
-    !taxon_sales.blank? &&
-        !product_excluded_from_all_sale?(taxon_sales)
   end
 
   def any_variant_on_sale

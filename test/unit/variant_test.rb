@@ -13,7 +13,7 @@ class VariantTest < ActiveSupport::TestCase
     assert variant.on_sale?, 'Not on sale'
   end
 
-  test "variant should be on sale if the parent product is not on sale" do
+  test "variant should be on sale if the parent product is not on sale but this variant is specificy on sale" do
     product = flexmock(Spree::Product.new)
     product.should_receive("on_sale?" => false)
 

@@ -16,12 +16,11 @@ Spree::Variant.class_eval do
 
   alias_method :orig_price_in, :price_in
   def price_in(currency)
-    on_sale? ? derived_sale_price : orig_price_in(currency)
+    on_sale? ?  Spree::Price.new(:variant_id => self.master.id, :amount => self.derived_sale_price , :currency => currency): orig_price_in(currency)
   end
 
-
   def sale_amount
-    discount_amount = orig_price * best_active_discount_amount_as_percent
+    orig_price * best_active_discount_amount_as_percent
   end
 
   def active_scheduled_sale
